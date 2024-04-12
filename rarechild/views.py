@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from rarechild.models import Category, Vendor, Product, productImages, Order, OrderItem, ProductReview, \
-    wishlist, Address, ProductVariation
+    wishlist, Address, ProductVariation, Blog, Blogpictures
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 
@@ -12,11 +12,13 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    products = Product.objects.all()[:5]
+    products = Product.objects.all()[0:6]
     hot_products = Product.objects.all()[6:11]
+    blogs = Blog.objects.all()[:3]
     context = {
+        "blogs": blogs,
         "products": products,
-        "hot_products": hot_products
+        "hot_products": hot_products,
     }
     return render(request, 'index.html', context)
 
@@ -181,11 +183,19 @@ def checkout(request):
 
 
 def blog(request):
-    return render(request, 'blog.html')
+    blogs = Blog.objects.all()
+    context = {
+        'blogs': blogs
+    }
+    return render(request, 'blog.html', context)
 
 
-def blogdetails(request):
-    return render(request, 'blog-details.html')
+def blogdetails(request, id):
+    blogs = Blog.objects.get(id=id)
+    context = {
+        'blogs': blogs
+    }
+    return render(request, 'blog-details.html', context)
 
 
 def contact(request):

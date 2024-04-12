@@ -1,7 +1,7 @@
 from django.contrib import admin
 from userauths.models import User
 from rarechild.models import Category, Vendor, Product, productImages, Order, OrderItem, ProductReview, \
-    wishlist, Address, Color, Size, ProductVariation
+    wishlist, Address, Color, Size, ProductVariation, Blog, Blogpictures
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -45,6 +45,7 @@ class AddressAdmin(admin.ModelAdmin):
     list_display = ['user', 'address', 'status']
 
 
+
 # Register your models here.
 admin.site.register(User, UserAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -59,3 +60,5 @@ admin.site.register(Address, AddressAdmin)
 admin.site.register(Color)
 admin.site.register(Size)
 admin.site.register(ProductVariation)
+admin.site.register(Blog)
+admin.site.register(Blogpictures)

@@ -213,3 +213,20 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Address"
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=1000, null=True)
+    imgurl = models.CharField(max_length=1000, null=True)
+    date = models.DateField(auto_created=True, null=True)
+    content = models.CharField(max_length=1000000, null=True)
+    class Meta:
+        verbose_name_plural = "Blog"
+
+class Blogpictures(models.Model):
+    images = models.ImageField(upload_to="blog-images", default="product.jpg")
+    blog = models.ForeignKey(Blog, related_name='blog_images', on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = "BlogPictures"
